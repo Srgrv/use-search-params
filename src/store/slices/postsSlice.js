@@ -12,7 +12,7 @@ export const getPostsAsync = createAsyncThunk(
   "posts/getPostsAsync",
   async () => {
     const response = await instance.get(`posts?_limit=30`);
-    console.log(response.data);
+
     return response.data;
   }
 );
