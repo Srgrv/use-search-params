@@ -11,7 +11,7 @@ const instance = axios.create({
 export const getPostsAsync = createAsyncThunk(
   "posts/getPostsAsync",
   async () => {
-    const response = await instance.get(`posts?_limit=30`);
+    const response = await instance.get(`posts`);
 
     return response.data;
   }
@@ -30,3 +30,5 @@ const postsSlice = createSlice({
 });
 
 export default postsSlice.reducer;
+
+//реализован поиск по списку, продолжить изучение react-router-dom

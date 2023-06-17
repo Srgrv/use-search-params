@@ -17,6 +17,9 @@ const PostsPage = () => {
   const [searchParams, setSearchParams] = useSearchParams();
 
   const postQuery = searchParams.get("post") || "";
+  const latest = searchParams.has("latest");
+
+  const startsFrom = latest ? 80 : 1;
 
   useEffect(() => {
     dispatch(getPostsAsync());
@@ -24,9 +27,15 @@ const PostsPage = () => {
 
   return (
     <div>
-      <FieldPostPages setSearchParams={setSearchParams} />
+      <FieldPostPages
+        setSearchParams={setSearchParams}
+        postQuery={postQuery}
+        latest={latest}
+      />
       {posts
-        .filter((post) => post.title.includes(postQuery))
+        .filter(
+          (post) => post.title.includes(postQuery) && post.id >= startsFrom
+        )
         .map((post) => {
           return (
             <li key={post.id}>
